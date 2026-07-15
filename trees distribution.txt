@@ -1,0 +1,87 @@
+NODE8:
+EVENT MATRIX:
+ Dispersal:2
+ Vicariance:0
+ Extinction:0
+Event Route:
+ ACD->ACD^A->ABCD^A->AD|ABC
+PROBABILITY:
+ 0.5164
+
+NODE9:
+EVENT MATRIX:
+ Dispersal:1
+ Vicariance:0
+ Extinction:1
+Event Route:
+ CDE->DE->DE^D->DE|D
+PROBABILITY:
+ 0.6351
+
+NODE10:
+EVENT MATRIX:
+ Dispersal:2
+ Vicariance:0
+ Extinction:0
+Event Route:
+ CDE->CDE^D^E->DE|CDE
+PROBABILITY:
+ 0.5199
+
+NODE11:
+EVENT MATRIX:
+ Dispersal:3
+ Vicariance:0
+ Extinction:0
+Event Route:
+ CDE->CDE^C^D->ACDE^C^D->CDE|ACD
+PROBABILITY:
+ 0.2097
+
+NODE12:
+EVENT MATRIX:
+ Dispersal:2
+ Vicariance:0
+ Extinction:0
+Event Route:
+ CDE->CDE^D^E->DE|CDE
+PROBABILITY:
+ 0.2805
+
+NODE13:
+EVENT MATRIX:
+ Dispersal:3
+ Vicariance:0
+ Extinction:0
+Event Route:
+ CD->CD^D->ACDE^D->AD|CDE
+PROBABILITY:
+ 0.3005
+
+===================
+Dispersal Between Areas:
+A->B:0.33333334
+C->A:0.8333334
+C->B:0.33333334
+C->E:0.5
+D->A:0.8333334
+D->B:0.33333334
+D->E:0.5
+E->A:0.33333334
+Speciation Within Areas:
+A:1
+C:1
+D:5
+E:2
+Dispersal Table:
+	from	to	within
+A	0.33	2.00	1
+B	0.00	1.00	0
+C	1.67	0.00	1
+D	1.67	0.00	5
+E	0.33	1.00	2
+===================
+Global Cost:
+ Global Dispersal: 13
+ Global Vicariance: 0
+ Global Extinction: 1
