@@ -1,0 +1,68 @@
+# Load required libraries
+library(ggplot2)
+library(readr)
+
+# Read the data
+data <- read.csv("Ka and Ks.csv")
+
+# Ensure gene order is preserved
+data$Gene <- factor(data$Gene, levels = unique(data$Gene))
+
+# Generate distinct colors for each gene
+set.seed(123)
+color_palette <- sample(colors(), length(unique(data$Gene)))
+
+# Define a custom theme with grey background and white grid lines
+custom_theme <- theme_minimal(base_size = 14) +
+  theme(
+    panel.background = element_rect(fill = "grey90", color = NA),
+    panel.grid.major = element_line(color = "white"),
+    panel.grid.minor = element_line(color = "white"),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none",
+    panel.border = element_blank(),
+    plot.background = element_rect(fill = NA, color = NA)
+  )
+
+# Plotting function for Ka, Ks, and Ka/Ks
+make_plot <- function(metric, y_label) {
+  ggplot(data, aes(x = Gene, y = .data[[metric]], fill = Gene, color = Gene)) +
+    # Draw T-shaped whisker caps
+    stat_boxplot(geom = "errorbar", width = 0.6, size = 0.8) +
+    # Draw boxplot with colored outliers
+    geom_boxplot(
+      width          = 0.6,
+      size           = 0.8,
+      outlier.shape  = 16,    # Circle
+      outlier.size   = 2.5,
+      outlier.stroke = 0.8
+    ) +
+    # Add properly placed thin horizontal median line
+    stat_summary(
+      fun = median,
+      geom = "crossbar",
+      width = 0.6,     # full width of box
+      color = "black",
+      size = 0.5       # thinner line
+    ) +
+    scale_fill_manual(values = color_palette) +
+    scale_color_manual(values = color_palette) +
+    labs(y = y_label, x = "") +
+    custom_theme
+}
+
+# Create plots
+p1 <- make_plot("Ka", "Ka")
+p2 <- make_plot("Ks", "Ks")
+p3 <- make_plot("Ka.Ks", "Ka/Ks")
+
+# Show plots
+print(p1)
+print(p2)
+print(p3)
+
+# Combine vertically
+combined_plot <- p1 / p2 / p3 + plot_layout(guides = "collect")
+
+# Show combined plot
+print(combined_plot)
